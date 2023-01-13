@@ -1,6 +1,7 @@
 package net.yorksolutions.services;
 
 import net.yorksolutions.models.Item;
+import net.yorksolutions.models.Recipe;
 import net.yorksolutions.repositories.ItemRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,23 @@ public class ItemService {
         // make sure item exists
         repository.findById(requestBody.getId()).orElseThrow();
         return  repository.save(requestBody);
+    }
+
+    public Iterable<Item> take(Recipe requestBody) throws Exception {
+        // check if all ingredients exist and have enough in the pantry
+        for (var ingredient : requestBody.getIngredients()) {
+            final var item = repository.findById(ingredient.getItem().getId()).orElseThrow();
+            if (ingredient.getWeight() > item.getQuantity()) {
+                throw new Exception("not enough in the pantry for this recipe");
+            }
+        }
+        // remove
+        for (var ingredient : requestBody.getIngredients()) {
+            final var item = repository.findById(ingredient.getItem().getId()).orElseThrow();
+            item.setQuantity(item.getQuantity() - ingredient.getWeight());
+            repository.save(item);
+        }
+        return repository.findAll();
     }
 
     public Iterable<Item> get() {

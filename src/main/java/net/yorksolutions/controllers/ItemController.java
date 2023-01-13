@@ -1,6 +1,7 @@
 package net.yorksolutions.controllers;
 
 import net.yorksolutions.models.Item;
+import net.yorksolutions.models.Recipe;
 import net.yorksolutions.services.ItemService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,15 @@ public class ItemController {
     public Item mod(@RequestBody Item requestBody) {
         try {
             return service.mod(requestBody);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @PutMapping("/take")
+    public Iterable<Item> mod(@RequestBody Recipe requestBody) {
+        try {
+            return service.take(requestBody);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

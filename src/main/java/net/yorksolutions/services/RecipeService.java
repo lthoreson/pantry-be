@@ -13,11 +13,19 @@ public class RecipeService {
     }
 
     public Recipe add(Recipe requestBody) {
-        System.out.println(requestBody);
         return repository.save(requestBody);
     }
 
     public Iterable<Recipe> getByAccountId(Long accountId) {
         return repository.findRecipesByAccount_Id(accountId);
+    }
+
+    public Recipe mod(Recipe requestBody) {
+        repository.findById(requestBody.getId()).orElseThrow();
+        return repository.save(requestBody);
+    }
+
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 }
