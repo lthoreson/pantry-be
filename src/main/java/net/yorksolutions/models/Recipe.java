@@ -16,6 +16,9 @@ public class Recipe {
     private String name;
     private String image;
     @ElementCollection
+    @CollectionTable(
+            uniqueConstraints= @UniqueConstraint(columnNames={"recipe_id","item_id"})
+    )
     private List<Ingredient> ingredients;
     @ElementCollection
     private List<String> steps;
