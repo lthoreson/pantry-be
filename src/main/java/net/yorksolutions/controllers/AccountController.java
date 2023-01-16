@@ -33,4 +33,22 @@ public class AccountController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
+
+    @PutMapping
+    public Account mod(@RequestBody Account requestBody, @RequestParam String username, @RequestParam String password) {
+        try {
+            return service.mod(requestBody, username, password);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public void mod(@PathVariable Long id, @RequestParam String username, @RequestParam String password) {
+        try {
+            service.deleteAccount(id, username, password);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
+        }
+    }
 }

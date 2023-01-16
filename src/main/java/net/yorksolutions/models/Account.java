@@ -13,7 +13,7 @@ public class Account {
     private String username;
     private String password;
     @JsonManagedReference
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Recipe> recipes;
 
     public Long getId() {

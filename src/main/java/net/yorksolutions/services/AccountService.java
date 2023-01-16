@@ -23,4 +23,20 @@ public class AccountService {
         }
         return repository.save(requestBody);
     }
+
+    public Account mod(Account requestBody, String username, String password) throws Exception {
+        final var auth = authenticate(username, password);
+        if (!requestBody.getId().equals(auth.getId())) {
+            throw new Exception("account id is incorrect");
+        }
+        return repository.save(requestBody);
+    }
+
+    public void deleteAccount(Long id, String username, String password) throws Exception {
+        final var auth = authenticate(username, password);
+        if (!id.equals(auth.getId())) {
+            throw new Exception("account id is incorrect");
+        }
+        repository.delete(auth);
+    }
 }
