@@ -46,7 +46,7 @@ public class ItemService {
     }
 
     public Iterable<Item> get() {
-        return repository.findAll();
+        return repository.findAllByOrderByName();
     }
 
     public void deleteItem(Long id) {
