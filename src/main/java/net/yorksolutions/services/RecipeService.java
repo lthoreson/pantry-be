@@ -1,15 +1,21 @@
 package net.yorksolutions.services;
 
+import jakarta.persistence.ElementCollection;
 import net.yorksolutions.models.Recipe;
+import net.yorksolutions.repositories.AccountRepository;
 import net.yorksolutions.repositories.RecipeRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class RecipeService {
     private final RecipeRepository repository;
+    private final AccountService accountService;
 
-    public RecipeService(RecipeRepository repository) {
+    public RecipeService(RecipeRepository repository, AccountRepository accountRepository, AccountService accountService) {
         this.repository = repository;
+        this.accountService = accountService;
     }
 
     public Recipe add(Recipe requestBody) {
@@ -25,7 +31,12 @@ public class RecipeService {
         return repository.save(requestBody);
     }
 
-    public void delete(Long id) {
+    public void delete(Long id, String username, String password) throws Exception {
+        final var auth = accountService.authenticate(username, password);
+        final var targetRecipe = repository.findById(id).orElseThrow();
+        if (!targetRecipe.getAccount().equals(auth)) {
+            throw new Exception("only recipe owner can delete");
+        }
         repository.deleteById(id);
     }
 }
