@@ -48,4 +48,9 @@ public class ItemService {
     public Iterable<Item> get() {
         return repository.findAll();
     }
+
+    public void deleteItem(Long id) {
+        repository.findById(id).orElseThrow();
+        repository.deleteById(id);
+    }
 }
