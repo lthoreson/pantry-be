@@ -36,7 +36,7 @@ public class ItemService {
                 throw new Exception("not enough in the pantry for this recipe");
             }
         }
-        // remove
+        // retrieve each ingredient item and reduce its quantity by ingredient weight
         for (var ingredient : requestBody.getIngredients()) {
             final var item = repository.findById(ingredient.getItem().getId()).orElseThrow();
             item.setQuantity(item.getQuantity() - ingredient.getWeight());
