@@ -15,6 +15,7 @@ public class Item {
     private String image;
     private Double weight;
     private Double calories;
+    private Double demand;
 
     public Double getWeight() {
         return weight;
@@ -62,5 +63,13 @@ public class Item {
 
     public void setQuantity(Double quantity) {
         this.quantity = quantity;
+    }
+
+    public Double getDemand() {
+        return demand;
+    }
+
+    public void setDemand(Double demand) {
+        this.demand = demand;
     }
 }
