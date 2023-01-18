@@ -42,7 +42,7 @@ public class ItemService {
             item.setQuantity(item.getQuantity() - ingredient.getWeight());
             repository.save(item);
         }
-        return repository.findAll();
+        return repository.findAllByOrderByName();
     }
 
     public Iterable<Item> get() {
