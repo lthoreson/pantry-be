@@ -1,12 +1,9 @@
 package net.yorksolutions.services;
 
-import jakarta.persistence.ElementCollection;
 import net.yorksolutions.models.Recipe;
 import net.yorksolutions.repositories.AccountRepository;
 import net.yorksolutions.repositories.RecipeRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class RecipeService {

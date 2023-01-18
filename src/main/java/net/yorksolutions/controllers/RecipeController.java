@@ -26,7 +26,7 @@ public class RecipeController {
     }
 
     @GetMapping
-    public Iterable getByAccountId(@RequestParam Long accountId) {
+    public Iterable<Recipe> getByAccountId(@RequestParam Long accountId) {
         try {
             return service.getByAccountId(accountId);
         } catch (Exception e) {
