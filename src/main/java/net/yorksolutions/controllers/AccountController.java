@@ -16,7 +16,7 @@ public class AccountController {
         this.service = service;
     }
 
-    @GetMapping
+    @GetMapping(params = {"username", "password"})
     public Account authenticate(@RequestParam String username, @RequestParam String password) {
         try {
             return service.authenticate(username, password);
