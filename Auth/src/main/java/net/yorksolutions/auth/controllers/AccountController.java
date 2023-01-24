@@ -1,5 +1,6 @@
 package net.yorksolutions.auth.controllers;
 
+import net.yorksolutions.auth.dto.Credentials;
 import net.yorksolutions.auth.models.Account;
 import net.yorksolutions.auth.services.AccountService;
 import org.springframework.http.HttpStatus;
@@ -46,7 +47,7 @@ public class AccountController {
     }
 
     @PutMapping
-    public void mod(@RequestBody Account requestBody, @RequestParam UUID token) {
+    public void mod(@RequestBody Credentials requestBody, @RequestParam UUID token) {
         try {
             service.mod(requestBody, token);
         } catch (Exception e) {

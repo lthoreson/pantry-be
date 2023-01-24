@@ -25,4 +25,13 @@ public class AuthController {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
     }
+
+    @DeleteMapping
+    public void deleteToken(@RequestParam UUID token) {
+        try {
+            service.deleteToken(token);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
 }

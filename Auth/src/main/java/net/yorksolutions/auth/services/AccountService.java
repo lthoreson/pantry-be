@@ -1,8 +1,11 @@
 package net.yorksolutions.auth.services;
 
+import net.yorksolutions.auth.dto.Credentials;
 import net.yorksolutions.auth.models.Account;
 import net.yorksolutions.auth.repositories.AccountRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.UUID;
 
@@ -35,11 +38,19 @@ public class AccountService {
         return repository.findById(auth).orElseThrow();
     }
 
-    public void mod(Account requestBody, UUID token) throws Exception {
+    public void mod(Credentials requestBody, UUID token) throws Exception {
         final var auth = authService.checkToken(token);
+        // stop if unauthorized
+        if (auth.equals(null)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        }
         final var targetAccount = repository.findById(auth).orElseThrow();
-        targetAccount.setUsername(requestBody.getUsername());
-        targetAccount.setPassword(requestBody.getPassword());
+        if (!requestBody.username.equals("")) {
+            targetAccount.setUsername(requestBody.username);
+        }
+        if (!requestBody.password.equals("")) {
+            targetAccount.setPassword(requestBody.password);
+        }
         repository.save(targetAccount);
     }
 

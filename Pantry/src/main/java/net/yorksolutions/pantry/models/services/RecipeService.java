@@ -1,7 +1,6 @@
-package net.yorksolutions.pantry.services;
+package net.yorksolutions.pantry.models.services;
 
 import net.yorksolutions.pantry.models.Recipe;
-import net.yorksolutions.pantry.repositories.AccountRepository;
 import net.yorksolutions.pantry.repositories.RecipeRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

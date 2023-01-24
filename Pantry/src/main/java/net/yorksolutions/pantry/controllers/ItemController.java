@@ -2,7 +2,7 @@ package net.yorksolutions.pantry.controllers;
 
 import net.yorksolutions.pantry.models.Item;
 import net.yorksolutions.pantry.models.Recipe;
-import net.yorksolutions.pantry.services.ItemService;
+import net.yorksolutions.pantry.models.services.ItemService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;

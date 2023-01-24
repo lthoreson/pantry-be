@@ -1,4 +1,4 @@
-package net.yorksolutions.pantry.services;
+package net.yorksolutions.pantry.models.services;
 
 import net.yorksolutions.pantry.models.Item;
 import net.yorksolutions.pantry.models.Recipe;

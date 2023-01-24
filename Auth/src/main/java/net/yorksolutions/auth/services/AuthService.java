@@ -32,4 +32,11 @@ public class AuthService {
         }
         return accountId;
     }
+
+    public void deleteToken(UUID token) {
+        final var accountIdOfDeletedToken = tokenMap.remove(token);
+        if (accountIdOfDeletedToken.equals(null)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
 }
