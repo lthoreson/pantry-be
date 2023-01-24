@@ -3,16 +3,21 @@ package net.yorksolutions.pantry.services;
 import net.yorksolutions.pantry.models.Recipe;
 import net.yorksolutions.pantry.repositories.AccountRepository;
 import net.yorksolutions.pantry.repositories.RecipeRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.UUID;
 
 @Service
 public class RecipeService {
     private final RecipeRepository repository;
-    private final AccountService accountService;
+    private RestTemplate client = new RestTemplate();
+    @Value("${net.yorksolutions.authUrl}")
+    private String authUrl;
 
-    public RecipeService(RecipeRepository repository, AccountRepository accountRepository, AccountService accountService) {
+    public RecipeService(RecipeRepository repository) {
         this.repository = repository;
-        this.accountService = accountService;
     }
 
     public Recipe add(Recipe requestBody) {
@@ -28,10 +33,11 @@ public class RecipeService {
         return repository.save(requestBody);
     }
 
-    public void delete(Long id, String username, String password) throws Exception {
-        final var auth = accountService.login(username, password);
+    public void delete(Long id, UUID token) throws Exception {
+        final var url = String.format("%s/auth?token=%s", authUrl, token);
+        final var auth = client.getForObject(url, Long.class);
         final var targetRecipe = repository.findById(id).orElseThrow();
-        if (!targetRecipe.getAccount().equals(auth)) {
+        if (!targetRecipe.getAccount().getId().equals(auth)) {
             throw new Exception("only recipe owner can delete");
         }
         repository.deleteById(id);

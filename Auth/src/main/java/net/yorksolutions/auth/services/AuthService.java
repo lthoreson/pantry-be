@@ -1,6 +1,6 @@
-package net.yorksolutions.pantry.services;
+package net.yorksolutions.auth.services;
 
-import net.yorksolutions.pantry.repositories.AccountRepository;
+import net.yorksolutions.auth.repositories.AccountRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;

@@ -1,7 +1,7 @@
-package net.yorksolutions.pantry.controllers;
+package net.yorksolutions.auth.controllers;
 
-import net.yorksolutions.pantry.models.Account;
-import net.yorksolutions.pantry.services.AccountService;
+import net.yorksolutions.auth.models.Account;
+import net.yorksolutions.auth.services.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;

@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.UUID;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/recipe")
@@ -44,9 +46,9 @@ public class RecipeController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id, @RequestParam String username, @RequestParam String password) {
+    public void delete(@PathVariable Long id, @RequestParam UUID token) {
         try {
-            service.delete(id, username, password);
+            service.delete(id, token);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
