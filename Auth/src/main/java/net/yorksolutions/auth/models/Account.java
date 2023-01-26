@@ -3,6 +3,7 @@ package net.yorksolutions.auth.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import net.yorksolutions.auth.dto.Credentials;
 
 import java.util.List;
 
@@ -17,6 +18,14 @@ public class Account {
     @JsonManagedReference
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Recipe> recipes;
+
+    public Account() {
+    }
+
+    public Account(Credentials cred) {
+        this.username = cred.username;
+        this.password = cred.password;
+    }
 
     public Long getId() {
         return id;

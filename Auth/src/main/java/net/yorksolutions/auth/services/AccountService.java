@@ -24,18 +24,22 @@ public class AccountService {
         return authService.addToken(foundAccount.getId());
     }
 
-    public UUID add(Account requestBody) throws Exception {
-        final var taken = repository.findAccountByUsername(requestBody.getUsername()).isPresent();
+    public UUID add(Credentials requestBody) throws Exception {
+        final var taken = repository.findAccountByUsername(requestBody.username).isPresent();
         if (taken) {
             throw new Exception("username is taken");
         }
-        final var newAccount = repository.save(requestBody);
+        final var newAccount = repository.save(new Account(requestBody));
         return authService.addToken(newAccount.getId());
     }
 
     public Account getAccount(UUID token) {
         final var auth = authService.checkToken(token);
         return repository.findById(auth).orElseThrow();
+    }
+
+    public Iterable<Account> getAllAccounts() {
+        return repository.findAll();
     }
 
     public void mod(Credentials requestBody, UUID token) throws Exception {

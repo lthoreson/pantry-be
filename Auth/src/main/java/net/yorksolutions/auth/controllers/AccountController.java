@@ -37,8 +37,17 @@ public class AccountController {
         }
     }
 
+    @GetMapping
+    public Iterable<Account> getAllAccounts() {
+        try {
+            return service.getAllAccounts();
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PostMapping
-    public UUID add(@RequestBody Account requestBody) {
+    public UUID add(@RequestBody Credentials requestBody) {
         try {
             return service.add(requestBody);
         } catch (Exception e) {

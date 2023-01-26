@@ -1,5 +1,6 @@
 package net.yorksolutions.pantry.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -11,6 +12,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String username;
+    @JsonIgnore
     private String password;
     @JsonManagedReference
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)

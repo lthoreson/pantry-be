@@ -22,6 +22,7 @@ public class Recipe {
     private List<Ingredient> ingredients;
     @ElementCollection
     private List<String> steps;
+    private boolean shared;
 
     public Long getId() {
         return id;
@@ -69,6 +70,14 @@ public class Recipe {
 
     public void setSteps(List<String> steps) {
         this.steps = steps;
+    }
+
+    public boolean isShared() {
+        return shared;
+    }
+
+    public void setShared(boolean shared) {
+        this.shared = shared;
     }
 
     @Override
