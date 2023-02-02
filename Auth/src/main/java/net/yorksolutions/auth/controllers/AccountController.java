@@ -37,10 +37,10 @@ public class AccountController {
         }
     }
 
-    @GetMapping
-    public Iterable<Account> getAllAccounts() {
+    @GetMapping(params = {"search"})
+    public Iterable<Account> getAllAccounts(@RequestParam String search) {
         try {
-            return service.getAllAccounts();
+            return service.getAllAccounts(search);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }

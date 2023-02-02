@@ -12,6 +12,7 @@ public class Recipe {
     private Long id;
     @JsonBackReference
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Account account;
     private String name;
     private String image;

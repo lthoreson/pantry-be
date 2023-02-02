@@ -38,8 +38,8 @@ public class AccountService {
         return repository.findById(auth).orElseThrow();
     }
 
-    public Iterable<Account> getAllAccounts() {
-        return repository.findAll();
+    public Iterable<Account> getAllAccounts(String search) {
+        return repository.findByUsernameStartsWith(search);
     }
 
     public void mod(Credentials requestBody, UUID token) throws Exception {

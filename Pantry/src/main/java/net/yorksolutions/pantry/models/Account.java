@@ -14,7 +14,7 @@ public class Account {
     private String username;
     @JsonIgnore
     private String password;
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Recipe> recipes;
 

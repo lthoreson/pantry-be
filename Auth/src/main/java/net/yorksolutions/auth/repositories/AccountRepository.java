@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface AccountRepository extends CrudRepository<Account, Long> {
     Optional<Account> findAccountByUsernameAndPassword(String username, String password);
     Optional<Account> findAccountByUsername(String username);
+    Iterable<Account> findByUsernameStartsWith(String search);
 }
