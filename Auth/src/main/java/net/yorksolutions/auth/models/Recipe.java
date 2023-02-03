@@ -24,6 +24,7 @@ public class Recipe {
     @ElementCollection
     private List<String> steps;
     private boolean shared;
+    private Long pantryId;
 
     public Long getId() {
         return id;
@@ -79,6 +80,14 @@ public class Recipe {
 
     public void setShared(boolean shared) {
         this.shared = shared;
+    }
+
+    public Long getPantryId() {
+        return pantryId;
+    }
+
+    public void setPantryId(Long pantryId) {
+        this.pantryId = pantryId;
     }
 
     @Override

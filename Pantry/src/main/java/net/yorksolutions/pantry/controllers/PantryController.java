@@ -53,4 +53,13 @@ public class PantryController {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
     }
+
+    @DeleteMapping("/{id}")
+    public void deletePantry(@PathVariable Long id, @RequestParam UUID token) {
+        try {
+            service.deletePantry(id, token);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
+        }
+    }
 }

@@ -28,7 +28,7 @@ public class ItemService {
         return  repository.save(requestBody);
     }
 
-    public Iterable<Item> take(Recipe requestBody) throws Exception {
+    public void take(Recipe requestBody) throws Exception {
         // check if all ingredients exist and have enough in the pantry
         for (var ingredient : requestBody.getIngredients()) {
             final var item = repository.findById(ingredient.getItem().getId()).orElseThrow();
@@ -42,7 +42,7 @@ public class ItemService {
             item.setQuantity(item.getQuantity() - ingredient.getWeight());
             repository.save(item);
         }
-        return repository.findAllByOrderByName();
+        repository.findAllByOrderByName();
     }
 
     public Iterable<Item> get() {

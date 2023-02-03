@@ -75,4 +75,16 @@ public class PantryService {
         }
         return repository.save(requestBody);
     }
+
+    public void deletePantry(Long id, UUID token) {
+        final var url = String.format("%s/auth?token=%s", authUrl, token);
+        final var auth = client.getForObject(url, Long.class);
+        final var target = repository.findById(id).orElseThrow();
+        final var targetOwnerId = target.getOwner().getId();
+        // delete pantry unauthorized if you are not the owner
+        if (!auth.equals(targetOwnerId)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        }
+        repository.deleteById(id);
+    }
 }

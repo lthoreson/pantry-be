@@ -45,9 +45,9 @@ public class ItemController {
     }
 
     @PutMapping("/take")
-    public Iterable<Item> mod(@RequestBody Recipe requestBody) {
+    public void mod(@RequestBody Recipe requestBody) {
         try {
-            return service.take(requestBody);
+            service.take(requestBody);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
